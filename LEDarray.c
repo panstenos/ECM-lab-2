@@ -29,15 +29,15 @@ void LEDarray_init(void)
     ANSELBbits.ANSELB1=0; //turn off analogue input on pin
     
 	//set initial output LAT values (they may have random values when powered on)
-    LATGbits.LATG0=1; //set TRIS value for pin (output)
-    LATGbits.LATG1=1; //set TRIS value for pin (output)
-    LATAbits.LATA2=1; //set TRIS value for pin (output)
-    LATFbits.LATF6=1; //set TRIS value for pin (output)
-    LATAbits.LATA4=1; //set TRIS value for pin (output)
-    LATAbits.LATA5=1; //set TRIS value for pin (output)
-    LATFbits.LATF0=1; //set TRIS value for pin (output)
-    LATBbits.LATB0=1; //set TRIS value for pin (output)
-    LATBbits.LATB1=1; //set TRIS value for pin (output)
+    LATGbits.LATG0=0; //set TRIS value for pin (output)
+    LATGbits.LATG1=0; //set TRIS value for pin (output)
+    LATAbits.LATA2=0; //set TRIS value for pin (output)
+    LATFbits.LATF6=0; //set TRIS value for pin (output)
+    LATAbits.LATA4=0; //set TRIS value for pin (output)
+    LATAbits.LATA5=0; //set TRIS value for pin (output)
+    LATFbits.LATF0=0; //set TRIS value for pin (output)
+    LATBbits.LATB0=0; //set TRIS value for pin (output)
+    LATBbits.LATB1=0; //set TRIS value for pin (output)
 }
 
 /************************************
@@ -67,10 +67,20 @@ void LEDarray_disp_bin(unsigned int number)
 void LEDarray_disp_dec(unsigned int number)
 {
 	unsigned int disp_val;
-	
-	//some code to manipulate the variable number into the correct
-	//format and store in disp_val for display on the LED array
-
+	disp_val = 0;
+    //some code to manipulate the variable number into the correct
+    //format and store in disp_val for display on the LED array  
+	//for each decimal count set the display value to match the 
+    if (number <= 9) {disp_val = 0;} 
+    if (number >  9) {disp_val = 1;}
+    if (number > 19) {disp_val = 3;}
+    if (number > 29) {disp_val = 7;}
+    if (number > 39) {disp_val = 15;}
+    if (number > 49) {disp_val = 31;}
+    if (number > 59) {disp_val = 63;}
+    if (number > 69) {disp_val = 127;}
+    if (number > 79) {disp_val = 255;}
+    if (number > 89) {disp_val = 511;}
 	LEDarray_disp_bin(disp_val); 	//display value on LED array
 }
 
@@ -90,3 +100,5 @@ void LEDarray_disp_PPM(unsigned int cur_val, unsigned int max)
 
 	LEDarray_disp_bin(disp_val);	//display value on LED array
 }
+
+
