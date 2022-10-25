@@ -70,8 +70,7 @@ void LEDarray_disp_dec(unsigned int number)
 	disp_val = 0;
     //some code to manipulate the variable number into the correct
     //format and store in disp_val for display on the LED array  
-	//for each decimal count set the display value to match the 
-    if (number <= 9) {disp_val = 0;} 
+    if (number <= 9) {disp_val = 0;}    
     if (number >  9) {disp_val = 1;}
     if (number > 19) {disp_val = 3;}
     if (number > 29) {disp_val = 7;}
@@ -81,6 +80,30 @@ void LEDarray_disp_dec(unsigned int number)
     if (number > 69) {disp_val = 127;}
     if (number > 79) {disp_val = 255;}
     if (number > 89) {disp_val = 511;}
+	LEDarray_disp_bin(disp_val); 	//display value on LED array
+}
+
+/************************************
+/ Function LEDarray_disp_dec
+/ Used to display a number on the LEDs
+/ where each LED is a value of 10
+************************************/
+void LEDarray_disp_dec2(unsigned int number)
+{
+	unsigned int disp_val;
+	disp_val = 0;
+    //some code to manipulate the variable number into the correct
+    //format and store in disp_val for display on the LED array  
+    if (number <= 25.5) {disp_val = 0;}    
+    if (number >  25.5) {disp_val = 1;}
+    if (number > 51.0) {disp_val = 3;}
+    if (number > 76.5) {disp_val = 7;}
+    if (number > 102) {disp_val = 15;}
+    if (number > 127.5) {disp_val = 31;}
+    if (number > 153) {disp_val = 63;}
+    if (number > 178.5) {disp_val = 127;}
+    if (number > 204) {disp_val = 255;}
+    if (number > 229.5) {disp_val = 511;}
 	LEDarray_disp_bin(disp_val); 	//display value on LED array
 }
 
@@ -94,6 +117,17 @@ void LEDarray_disp_dec(unsigned int number)
 void LEDarray_disp_PPM(unsigned int cur_val, unsigned int max)
 {
 	unsigned int disp_val;
+	disp_val = 0;
+    //some code to manipulate the variable number into the correct
+    //format and store in disp_val for display on the LED array  
+
+	// some code to format the variable cur_val and max, store in disp_val for display on the LED array
+	// hint: one method is to manipulate the variables separately and then combine them using the bitwise OR operator
+
+	LEDarray_disp_bin(disp_val);	//display value on LED array
+}
+
+
 	
 	// some code to format the variable cur_val and max, store in disp_val for display on the LED array
 	// hint: one method is to manipulate the variables separately and then combine them using the bitwise OR operator
