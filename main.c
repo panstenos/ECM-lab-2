@@ -6,7 +6,7 @@
 
 #include <xc.h>
 #include "LEDarray.h"
-
+#include <stdio.h>
 #define _XTAL_FREQ 64000000 //note intrinsic _delay function is 62.5ns at 64,000,000Hz  
 
 
@@ -25,8 +25,9 @@ void main(void)
             if (!PORTFbits.RF2){ // when button 'RF2' is pressed
                 count++; // increase the count when the button is pressed
                 }
-		if (count>511) {count=0;} //reset a when it gets too big
-		LEDarray_disp_bin(count); //output a on the LED array in binary
-		__delay_ms(500); // Delay so human eye can see change //original delay 50ms
+		if (count>99) {count=0;} //reset a when it gets too big
+		LEDarray_disp_dec(count); //output a on the LED array in binary
+        //(count);
+		__delay_ms(200); // Reset back to 200 to see the change
     }
 }
