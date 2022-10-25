@@ -17,7 +17,7 @@ void main(void)
     ADC_init();
     
     while (1) {
-        LEDarray_disp_dec(ADC_getval());
+        LEDarray_disp_dec2(ADC_getval());
 		__delay_ms(100); // Delay so human eye can see change //original delay 50ms
     }
 }
