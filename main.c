@@ -1,3 +1,5 @@
+//main.c
+
 #pragma config FEXTOSC = HS     // External Oscillator mode Selection bits (HS (crystal oscillator) above 8 MHz; PFM set to high power)
 #pragma config RSTOSC = EXTOSC_4PLL// Power-up default value for COSC bits (EXTOSC with 4x PLL, with EXTOSC operating per FEXTOSC bits)
 #pragma config WDTE = OFF        // WDT operating mode (WDT enabled regardless of sleep)
@@ -25,6 +27,6 @@ void main(void)
                 }
 		if (count>511) {count=0;} //reset a when it gets too big
 		LEDarray_disp_bin(count); //output a on the LED array in binary
-		__delay_ms(200); // Delay so human eye can see change //original delay 50ms
+		__delay_ms(500); // Delay so human eye can see change //original delay 50ms
     }
 }
