@@ -3,7 +3,7 @@
 
 /************************************
 / LEDarray_init
-/ Function used to initialise pins to drive the LEDarray
+/ Function used to initialise pins to drivcvxc           e the LEDarray
 ************************************/
 void LEDarray_init(void)
 {
@@ -84,31 +84,6 @@ void LEDarray_disp_dec(unsigned int number)
 }
 
 /************************************
-/ Function LEDarray_disp_dec
-/ Used to display a number on the LEDs
-/ where each LED is a value of 10
-************************************/
-void LEDarray_disp_dec2(unsigned int number)
-{
-	unsigned int disp_val;
-	disp_val = 0;
-    //some code to manipulate the variable number into the correct
-    //format and store in disp_val for display on the LED array  
-    if (number <= 25.5) {disp_val = 0;}    
-    if (number >  25.5) {disp_val = 1;}
-    if (number > 51.0) {disp_val = 3;}
-    if (number > 76.5) {disp_val = 7;}
-    if (number > 102) {disp_val = 15;}
-    if (number > 127.5) {disp_val = 31;}
-    if (number > 153) {disp_val = 63;}
-    if (number > 178.5) {disp_val = 127;}
-    if (number > 204) {disp_val = 255;}
-    if (number > 229.5) {disp_val = 511;}
-	LEDarray_disp_bin(disp_val); 	//display value on LED array
-}
-
-
-/************************************
 / LEDarray_disp_PPM
 / Function used to display a level on the LED array with peak hold
 / cur_val is the current level from the most recent sample, and max is the peak value for the last second
@@ -116,22 +91,41 @@ void LEDarray_disp_dec2(unsigned int number)
 ************************************/
 void LEDarray_disp_PPM(unsigned int cur_val, unsigned int max)
 {
-	unsigned int disp_val;
-	disp_val = 0;
-    //some code to manipulate the variable number into the correct
-    //format and store in disp_val for display on the LED array  
-
-	// some code to format the variable cur_val and max, store in disp_val for display on the LED array
-	// hint: one method is to manipulate the variables separately and then combine them using the bitwise OR operator
-
-	LEDarray_disp_bin(disp_val);	//display value on LED array
-}
-
-
-	
-	// some code to format the variable cur_val and max, store in disp_val for display on the LED array
-	// hint: one method is to manipulate the variables separately and then combine them using the bitwise OR operator
-
+        
+    unsigned int con_curr;	
+    con_curr = 0;
+    // convert current value to multiple LED output 
+    // split the resistance input to deciles
+    if (cur_val <= 25.5) {con_curr = 0;}    
+    if (cur_val >  25.5) {con_curr = 1;}
+    if (cur_val > 51.0) {con_curr = 3;}
+    if (cur_val > 76.5) {con_curr = 7;}
+    if (cur_val > 102) {con_curr = 15;}
+    if (cur_val > 127.5) {con_curr = 31;}
+    if (cur_val > 153) {con_curr = 63;}
+    if (cur_val > 178.5) {con_curr = 127;}
+    if (cur_val > 204) {con_curr = 255;}
+    if (cur_val > 229.5) {con_curr = 511;}
+    
+	unsigned int con_max;
+	con_max = 0;
+    // convert max value to single LED output 
+    // split the resistance input to deciles
+    if (max <= 25.5) {con_max = 0;}    
+    if (max >  25.5) {con_max = 1;}
+    if (max > 51.0) {con_max = 2;}
+    if (max > 76.5) {con_max = 4;}
+    if (max > 102) {con_max = 8;}
+    if (max > 127.5) {con_max = 16;}
+    if (max > 153) {con_max = 32;}
+    if (max > 178.5) {con_max = 64;}
+    if (max > 204) {con_max = 128;}
+    if (max > 229.5) {con_max = 256;}
+    
+    unsigned int disp_val; 
+    
+    disp_val = con_max | con_curr;
+    __delay_ms(200);
 	LEDarray_disp_bin(disp_val);	//display value on LED array
 }
 
