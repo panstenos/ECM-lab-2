@@ -125,8 +125,8 @@ void LEDarray_disp_PPM(unsigned int cur_val, unsigned int max)
     unsigned int disp_val; 
     
     disp_val = con_max | con_curr;
-    __delay_ms(200);
 	LEDarray_disp_bin(disp_val);	//display value on LED array
 }
+
 
 
