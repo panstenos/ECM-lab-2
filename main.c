@@ -23,10 +23,10 @@ void main(void)
         if (ADC_getval() > max){max = ADC_getval();}
         
         else{
-        max = max >> 1;
+        max = max - 5.1; //decrease by 1/5th of the interval each time -> 1s delay
+        __delay_ms(200); //timer every 200s
         }
         
         LEDarray_disp_PPM(ADC_getval(),max); //use the PPM function
-
     }
 }
