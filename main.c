@@ -11,13 +11,22 @@
 
 
 void main(void) 
-{
+{   
     // setup pin for input (connected to button)
     LEDarray_init();
     ADC_init();
     
+    unsigned int max = 0;
+    
     while (1) {
-        LEDarray_disp_dec2(ADC_getval());
-		__delay_ms(100); // Delay so human eye can see change //original delay 50ms
+        // if the current value is greater than the max value -> set that as the max value
+        if (ADC_getval() > max){max = ADC_getval();}
+        
+        else{
+        max = max >> 1;
+        }
+        
+        LEDarray_disp_PPM(ADC_getval(),max); //use the PPM function
+
     }
 }
